@@ -54,9 +54,9 @@ li:first-child {
 }
 
 .fill-height-or-more {
-  flex-direction: column;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 .fill-height-or-more > li {
@@ -124,20 +124,62 @@ li:first-child {
   border: 3px solid #555;
 }
 
-@media (min-width: 410px) {
-  .split-1 > li {
-    max-width: calc(100% / 1);
-  }
-  .split-2 > li {
-    max-width: calc(100% / 2);
-  }
-  .split-3 > li {
-    max-width: calc(100% / 3);
-  }
-  .split-4 > li {
-    max-width: calc(100% / 4);
-  }
-  .split-5 > li {
-    max-width: calc(100% / 5);
-  }
+/* Set up the grid */
+
+li.dev {
+  grid-column: 1/2;
+}
+
+li.release {
+  grid-column: 2/3;
+}
+
+li.master {
+  grid-column: 3/4;
+}
+
+li.bolide-api {
+  grid-row: 1/2;
+}
+
+li.bolidebroker {
+  grid-row: 2/3;
+}
+
+li.bolide-frontend {
+  grid-row: 3/4;
+}
+
+li.bolide-ios {
+  grid-row: 4/5;
+}
+
+/* Style boxes */
+
+icon {
+  font-size: 4em;
+}
+
+h1 {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  font-size: 3em;
+  line-height: 0.9em;
+  font-family: 'Catamaran', sans-serif;
+  text-transform: capitalize;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 2em;
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 400;
+  line-height: 1em;
+}
+
+li {
+  padding: 2em;
 }

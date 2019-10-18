@@ -1,10 +1,13 @@
 <!doctype html>
 
 <head>
-  <title>CI radiator view</title>
+  <title>Bolide CI Builds</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
+  <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:400,800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
   <script src="backends.js"></script>
@@ -41,33 +44,56 @@
     var error = document.getElementById('error')
 
     function createJob(build) {
-      var name = `${build.repository}: ${decodeURIComponent(build.branch)}`
+      var branchName = decodeURIComponent(build.branch)
       var time = new Date(build.started)
 
       var listItem = document.createElement('li')
       var header = document.createElement('h1')
-      var description = document.createElement('time')
+      var subhead = document.createElement('h2')
+      var lastBuiltOn = document.createElement('h2')
       var author = document.createElement('div')
+      var icon = document.createElement('icon')
       var authorName = ''
       if (build.commit && build.commit.author) {
         authorName = build.commit.author
       }
 
-      header.textContent = name
-      description.textContent = `
-      ${time.getDate()}.${time.getMonth() + 1}.${time.getFullYear()}
-      ${time.toString().replace(/.*(\d{2}:\d{2}):(\d{2}).*/, '$1')}
-      `
+      var icons = {
+        'bolide-ios': "1F4F1",
+        'bolide-frontend': "269B", 
+        'bolidebroker': "1F454",
+        "bolide-api": "1F916"
+      };
+      
+      var repoName = build.repository
+      var iconName = `0x${icons[repoName]}`
+      icon.textContent = String.fromCodePoint(iconName);
+      header.textContent = repoName
+      subhead.textContent = `${branchName} was last built on`
+      lastBuiltOn.textContent = `
+      ${time.toLocaleString('en-US', {
+        month: 'long',
+        day: 'numeric', 
+        hour: 'numeric', 
+        hour12: true, 
+        minute: 'numeric'
+      })}`
+      
       author.innerHTML = authorName
 
-      listItem.innerHTML = header.outerHTML + description.outerHTML + author.outerHTML
-      listItem.className = build.state
+      listItem.innerHTML = icon.outerHTML + header.outerHTML + subhead.outerHTML + lastBuiltOn.outerHTML + author.outerHTML
+      listItem.className = build.state + " " + repoName + " " + branchName
 
-      radiator.innerHTML = radiator.innerHTML + listItem.outerHTML
+      // TODO: replace goodBranchesUsingWeirdBranchNames with goodBranchesWhenWeAddRealGitflowNames
+      var goodBranchesWhenWeAddRealGitflowNames = ["dev", "release", "master"]
+      var goodBranchesUsingWeirdBranchNames = ["dev-dummy-test", "release-release", "master"]
+      if (goodBranchesUsingWeirdBranchNames.includes(branchName)){
+        radiator.innerHTML = radiator.innerHTML + listItem.outerHTML
+      }
     }
 
     function calculateColumns(data) {
-      var builds = data.length
+      var builds = 12 //data.length
       return Math.min(5, Math.ceil(builds / 5))
     }
 
@@ -82,7 +108,7 @@
       }
       setRadiatorColumns(calculateColumns(builds))
       radiator.innerHTML = ''
-      radiator.style.display = 'flex'
+      radiator.style.display = 'grid'
 
       _.map(builds, createJob)
     }

@@ -13,6 +13,8 @@ Build type:
 }
 */
 
+
+
 function buildBackend(settings, callback) {
   var backend = circleBackend
   if (settings.mode === 'travis') {
@@ -51,7 +53,7 @@ function backendOptions() {
     circle: {
       name: 'Circle CI',
       url: 'https://circleci.com/api/v1/projects',
-      token: undefined
+      token: '61b822ce1a00caeba99b44378dbceb153ba8288d'
     },
     travis: {
       name: 'Travis CI',
@@ -312,3 +314,5 @@ var jenkinsBackend = function(settings, resultCallback) {
     resultCallback(undefined, builds)
   })
 }
+
+ 
