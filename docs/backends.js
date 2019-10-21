@@ -13,8 +13,6 @@ Build type:
 }
 */
 
-
-
 function buildBackend(settings, callback) {
   var backend = circleBackend
   if (settings.mode === 'travis') {
