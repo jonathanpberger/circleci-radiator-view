@@ -1,3 +1,13 @@
+# Hi!
+
+This app displays the build status for the Bolide family of apps. It's meant to be displayed on a wall-mounted tv in a public place. You can find the hosted version on GH pages:
+
+https://code8-io.github.io/bolide-ci-radiator/
+
+<!-- ![Circle CI Radiator view](/readme_radiator.png?raw=true 'Circle CI Radiator view') -->
+
+It's based on https://github.com/sampsakuronen/circleci-radiator-view/
+
 # Simple build status radiator view
 
 Many continuous integration services lack a nice and simple radiator view / dashboard. This project displays all your projects and selected branches with a beautiful build status based coloring.
@@ -7,13 +17,6 @@ Supported systems are [CircleCI](https://circleci.com/), [Travis CI](https://tra
 
 _Pull requests are welcome._
 
-![Circle CI Radiator view](/readme_radiator.png?raw=true 'Circle CI Radiator view')
-
-## Hosted version
-
-https://sampsakuronen.github.io/circleci-radiator-view/
-
-This page will always reflect the newest content of this repository. For security reasons you may decide to fork this repository and have your own version running.
 
 ## Setup
 
