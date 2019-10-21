@@ -84,10 +84,9 @@
       listItem.innerHTML = icon.outerHTML + header.outerHTML + subhead.outerHTML + lastBuiltOn.outerHTML + author.outerHTML
       listItem.className = build.state + " " + repoName + " " + branchName
 
-      // TODO: replace goodBranchesUsingWeirdBranchNames with goodBranchesWhenWeAddRealGitflowNames
-      var goodBranchesWhenWeAddRealGitflowNames = ["dev", "release", "master"]
-      var goodBranchesUsingWeirdBranchNames = ["dev-dummy-test", "release-release", "master"]
-      if (goodBranchesUsingWeirdBranchNames.includes(branchName)){
+      // var legacyBranchNames = ["dev-dummy-test", "release-release", "master"]
+      var branchesWeWantToDisplay = ["dev", "release", "master"]
+      if (branchesWeWantToDisplay.includes(branchName)){
         radiator.innerHTML = radiator.innerHTML + listItem.outerHTML
       }
     }
